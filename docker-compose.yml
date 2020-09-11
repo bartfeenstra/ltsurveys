@@ -1,0 +1,43 @@
+version: '3'
+services:
+  limesurvey:
+    container_name: 'ltsurveys-limesurvey'
+    image: 'acspri/limesurvey:3.23.2-lts'
+    restart: 'always'
+    volumes:
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    environment:
+      LIMESURVEY_DB_HOST: 'ltsurveys-db'
+      LIMESURVEY_DB_USER: 'ltsurveys'
+      LIMESURVEY_DB_PASSWORD: '${MYSQL_PASSWORD}'
+      LIMESURVEY_DB_NAME: 'ltsurveys-limesurvey'
+      LIMESURVEY_ADMIN_USER: '${LIMESURVEY_ADMIN_USER}'
+      LIMESURVEY_ADMIN_PASSWORD: '${LIMESURVEY_ADMIN_PASSWORD}'
+      LIMESURVEY_ADMIN_NAME: '${LIMESURVEY_ADMIN_NAME}'
+      LIMESURVEY_ADMIN_EMAIL: '${LIMESURVEY_ADMIN_EMAIL}'
+    networks:
+      ltsurveys:
+    ports:
+      - '8089:80'
+    depends_on:
+      - 'db'
+  db:
+    container_name: 'ltsurveys-db'
+    image: 'mariadb:10'
+    restart: 'always'
+    volumes:
+    - '/etc/localtime:/etc/localtime:ro'
+    - '/etc/timezone:/etc/timezone:ro'
+    - './data/db/mysql:/var/lib/mysql'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_USER: 'ltsurveys'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_DATABASE: 'ltsurveys-limesurvey'
+    networks:
+      ltsurveys:
+        aliases:
+            - 'db'
+networks:
+  ltsurveys:

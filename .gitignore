@@ -1,0 +1,5 @@
+# Instance-specific files.
+.env
+
+# Runtime data.
+/data
