@@ -4,9 +4,6 @@ services:
     container_name: 'ltsurveys-limesurvey'
     image: 'acspri/limesurvey:3.23.2-lts'
     restart: 'always'
-    volumes:
-    - '/etc/localtime:/etc/localtime:ro'
-    - '/etc/timezone:/etc/timezone:ro'
     environment:
       LIMESURVEY_DB_HOST: 'ltsurveys-db'
       LIMESURVEY_DB_USER: 'ltsurveys'
@@ -27,8 +24,6 @@ services:
     image: 'mariadb:10'
     restart: 'always'
     volumes:
-    - '/etc/localtime:/etc/localtime:ro'
-    - '/etc/timezone:/etc/timezone:ro'
     - './data/db/mysql:/var/lib/mysql'
     environment:
       MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
