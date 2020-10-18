@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+. ./.env
+
+./bin/stop
+
+version=$(date +%s)
+backup_directory_path="./data-backup/$version"
+mkdir -p ./data
+mkdir -p ./data-backup
+sudo cp -R ./data "$backup_directory_path"
+
+./bin/start

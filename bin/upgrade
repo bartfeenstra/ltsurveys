@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+. ./.env
+
+./bin/backup
+sleep 120
+
+docker exec ltsurveys-limesurvey php application/commands/console.php updatedb
