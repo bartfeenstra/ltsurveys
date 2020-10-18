@@ -2,7 +2,7 @@ version: '3'
 services:
   limesurvey:
     container_name: 'ltsurveys-limesurvey'
-    image: 'acspri/limesurvey:3.23.2-lts'
+    image: 'acspri/limesurvey:4.3.21'
     restart: 'always'
     environment:
       LIMESURVEY_DB_HOST: 'ltsurveys-db'
