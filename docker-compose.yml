@@ -4,6 +4,9 @@ services:
     container_name: 'ltsurveys-limesurvey'
     image: 'acspri/limesurvey:4.3.21'
     restart: 'always'
+    volumes:
+    - './data/limesurvey/plugins:/var/www/html/plugins'
+    - './data/limesurvey/upload:/var/www/html/upload'
     environment:
       LIMESURVEY_DB_HOST: 'ltsurveys-db'
       LIMESURVEY_DB_USER: 'ltsurveys'
