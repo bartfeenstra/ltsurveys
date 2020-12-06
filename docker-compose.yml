@@ -2,7 +2,7 @@ version: '3'
 services:
   limesurvey:
     container_name: 'ltsurveys-limesurvey'
-    image: 'acspri/limesurvey:4.3.21'
+    image: 'acspri/limesurvey:4.3.29'
     restart: 'always'
     volumes:
     - './data/limesurvey/plugins:/var/www/html/plugins'
